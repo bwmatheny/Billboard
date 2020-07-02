@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+require './lib/billboard'
+require "./lib/billboard/songs"
+require 'nokogiri'
+require 'open-uri'
+
+Billboard::CLI.new.call
