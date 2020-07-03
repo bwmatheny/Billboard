@@ -12,6 +12,7 @@ def initialize(input)
     top.each_with_index do |info, i|
       title = info.css(".chart-element__information__song").text
       artist = info.css(".chart-element__information__artist").text.gsub(" Featuring", ", Featuring -").split(", ")
+      string = info.css(".chart-element__information__artist").text.gsub(" Featuring", ", Featuring -")
       delta = info.css(".chart-element__information__delta__text.text--default").text.to_i
       trend = info.css(".chart-element__trend").text.gsub("Failing", "Falling")
       last = info.css(".chart-element__information__delta__text.text--last").text.gsub(" Last Week", "").to_i
@@ -20,8 +21,8 @@ def initialize(input)
       rank = info.css(".chart-element__rank__number").text.to_i
 
 
-      Billboard::Songs.new(title, artist, delta, last, peak, duration, rank, trend)
-      puts "#{rank}. '#{title}', by #{artist.join(" ")}"
+      Billboard::Songs.new(title, artist, delta, last, peak, duration, rank, trend, string)
+      puts "#{rank}. '#{title}', by #{string}"
     end
 end
 

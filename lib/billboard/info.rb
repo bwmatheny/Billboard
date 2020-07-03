@@ -11,7 +11,7 @@ class Billboard::Info
                 if
                 x.artist.count == 2
                 x.title << ", #{x.artist[1]}"
-                x.artist = x.artist[0].to_s
+                x.artist = x.artist[0]
                 elsif x.artist.count == 1
                 x.artist = x.artist.join
                 end
@@ -33,9 +33,6 @@ class Billboard::Info
         elsif x.delta.abs() == 1 && r.even?
             puts "\nAfter #{x.duration} weeks on the chart #{x.artist} #{x.trend.gsub("Rising", "rises").gsub("Falling", "falls")} one spot to Number #{x.rank} this week with '#{x.title}'\n"
     
-        elsif x.delta > 1
-            puts "\nAfter #{x.duration} weeks on the chart #{x.artist} #{x.trend.gsub("Rising", "rises").gsub("Falling", "falls")} #{x.delta} spots to Number #{x.rank} this week with '#{x.title}'\n"
-    
         elsif x.delta.abs() == 1 && r.odd?
             puts "\n#{x.trend} #{x.delta} spot this week to Number #{x.rank} in the countdown, #{x.artist}, brings you '#{x.title}'\n"
     
@@ -53,6 +50,12 @@ class Billboard::Info
     
         elsif x.trend == "Steady" && r.odd?
             puts "\nRemaining at Number #{x.rank} again this week is #{x.artist}'s track #{x.title}\n"
+
+        elsif x.delta.abs() > 1 && r.even?
+            puts "\nAfter #{x.duration} weeks on the chart #{x.artist} #{x.trend.gsub("Rising", "rises").gsub("Falling", "falls")} #{x.delta} spots to Number #{x.rank} this week with '#{x.title}'\n"
+
+        elsif x.delta.abs() > 1 && r.odd?
+            puts "\n#{x.trend} #{x.delta.abs()} spots over the last week, #{x.title}, by #{x.artist}\n"
             
         end
     
