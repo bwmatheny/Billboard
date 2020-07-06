@@ -1,4 +1,4 @@
-require 'pry'
+
 
 class Billboard::CLI
     def call
@@ -28,7 +28,9 @@ class Billboard::CLI
 
     def list_songs
      puts "\nTop #{Billboard::Songs.all.count} Songs this Week:\n"
-       Billboard::Songs.list
+     Billboard::Songs.all.each {|s| 
+     puts "#{s.rank}. '#{s.title}', by #{s.string}"
+     }
     end
 
     def menu
@@ -39,13 +41,13 @@ class Billboard::CLI
 
             input = gets.strip.downcase
             if input.to_i > 0 && input.to_i <= Billboard::Songs.all.count
-                Billboard::Info.description(input.to_i)
+                Billboard::Songs.description(input.to_i)
             elsif input == "list"
                 list_songs
             elsif input == "exit"
                 goodbye
             else
-                puts "Invalid Input\n"
+                puts "\nInvalid Input\n"
             end
         end
     end
